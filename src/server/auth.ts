@@ -57,15 +57,10 @@ export const authOptions: NextAuthOptions = {
       },
       from: process.env.EMAIL_FROM || "test@localhost.com",
 
-      ...(process.env.NODE_ENV === "production"
+      ...(process.env.NODE_ENV !== "production"
         ? {
-            sendVerificationRequest({
-              identifier: email,
-              url,
-              provider: { server, from },
-            }) {
-              console.log(email, server, from);
-              console.log(url);
+            sendVerificationRequest({ url }) {
+              console.log("LOGIN LINK", url);
             },
           }
         : {}),
