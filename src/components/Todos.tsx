@@ -10,9 +10,11 @@ export function Todos() {
 
 	return (
 		<>
-			{todos.length ? todos.map((todo) => {
-				return <Todo key={todo.id} todo={todo} />
-			}) : "Create your first todo..."}
+			{todos.length ?
+				todos.map((todo) => {
+					return <Todo key={todo.id} todo={todo} />
+				})
+				: "Create your first todo..."}
 		</>
 	)
 }

@@ -27,7 +27,6 @@
     "zod": "^3.20.2"
   },
   "devDependencies": {
-    "@tanstack/react-query-devtools": "^4.24.4",
     "@types/node": "^18.11.18",
     "@types/prettier": "^2.7.2",
     "@types/react": "^18.0.26",
