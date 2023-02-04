@@ -47,20 +47,28 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     EmailProvider({
-      server: process.env.EMAIL_SERVER || "http://localhost:3000",
-      from: process.env.EMAIL_FROM || "test@localhost.com",
-      sendVerificationRequest({
-        identifier: email,
-        url,
-        provider: { server, from },
-      }) {
-        if (process.env.NODE_ENV === "production") {
-          // sendLoginEmail(email, url);
-          return;
-        }
-        console.log(email, server, from);
-        console.log(url);
+      server: {
+        host: process.env.EMAIL_SERVER || "http://localhost:3000",
+        port: 587,
+        auth: {
+          user: "apikey",
+          pass: process.env.EMAIL_API_KEY,
+        },
       },
+      from: process.env.EMAIL_FROM || "test@localhost.com",
+
+      ...(process.env.NODE_ENV === "production"
+        ? {
+            sendVerificationRequest({
+              identifier: email,
+              url,
+              provider: { server, from },
+            }) {
+              console.log(email, server, from);
+              console.log(url);
+            },
+          }
+        : {}),
     }),
     /**
      * ...add more providers here
