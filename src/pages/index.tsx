@@ -8,7 +8,7 @@ function Home() {
       <Head>
         <title>Full stack todo app</title>
         <meta name="description" content="Full stack todo app" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#0f1235] to-[#090920]">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
