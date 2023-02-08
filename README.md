@@ -1,7 +1,7 @@
 # Full stack tutorial by Daniel Bark
 This tutorial creates an authenticated Todo app with TRPC, Next.js, Prisma, Tailwind.
 The app uses optimistic updates for all mutations.
-Auth is via magic link email
+Auth is via magic link email.
 
 # Create T3 App
 

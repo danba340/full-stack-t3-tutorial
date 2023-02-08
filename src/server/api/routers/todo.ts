@@ -32,7 +32,7 @@ export const todoRouter = createTRPCRouter({
       },
     });
   }),
-  done: protectedProcedure
+  toggle: protectedProcedure
     .input(
       z.object({
         id: z.string(),

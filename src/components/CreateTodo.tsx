@@ -39,7 +39,7 @@ export function CreateTodo() {
 		// If the mutation fails,
 		// use the context returned from onMutate to roll back
 		onError: (err, newTodo, context) => {
-			console.log('ERROR', err)
+			toast.error("An error occured when creating todo")
 			// Clear input
 			setNewTodo(newTodo)
 			if (!context) return

@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import type { Todo } from "../types";
 import { api } from "../utils/api";
 
@@ -10,7 +11,7 @@ export function Todo({ todo }: TodoProps) {
 
 	const trpc = api.useContext();
 
-	const { mutate: doneMutation } = api.todo.done.useMutation({
+	const { mutate: doneMutation } = api.todo.toggle.useMutation({
 		onMutate: async ({ id, done }) => {
 
 			// Cancel any outgoing refetches so they don't overwrite our optimistic update
@@ -36,9 +37,17 @@ export function Todo({ todo }: TodoProps) {
 			// Return a context object with the snapshotted value
 			return { previousTodos }
 		},
+
+		onSuccess: (err, { done }) => {
+			if (done) {
+				toast.success("Todo completed 🎉")
+			}
+		},
+
 		// If the mutation fails,
 		// use the context returned from onMutate to roll back
-		onError: (err, newTodo, context) => {
+		onError: (err, done, context) => {
+			toast.error(`An error occured when marking todo as ${done ? "done" : "undone"}`)
 			if (!context) return
 			trpc.todo.all.setData(undefined, () => context.previousTodos)
 		},
@@ -69,6 +78,7 @@ export function Todo({ todo }: TodoProps) {
 		// If the mutation fails,
 		// use the context returned from onMutate to roll back
 		onError: (err, newTodo, context) => {
+			toast.error(`An error occured when deleting todo`)
 			if (!context) return
 			trpc.todo.all.setData(undefined, () => context.previousTodos)
 		},
