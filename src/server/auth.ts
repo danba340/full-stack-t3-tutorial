@@ -4,7 +4,6 @@ import {
   type NextAuthOptions,
   type DefaultSession,
 } from "next-auth";
-import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "./db";
 
@@ -46,25 +45,6 @@ export const authOptions: NextAuthOptions = {
   },
   adapter: PrismaAdapter(prisma),
   providers: [
-    EmailProvider({
-      server: {
-        host: process.env.EMAIL_SERVER || "http://localhost:3000",
-        port: 587,
-        auth: {
-          user: "apikey",
-          pass: process.env.EMAIL_API_KEY,
-        },
-      },
-      from: process.env.EMAIL_FROM || "test@localhost.com",
-
-      ...(process.env.NODE_ENV !== "production"
-        ? {
-            sendVerificationRequest({ url }) {
-              console.log("LOGIN LINK", url);
-            },
-          }
-        : {}),
-    }),
     /**
      * ...add more providers here
      *
