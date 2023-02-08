@@ -3,6 +3,29 @@ This tutorial creates an authenticated Todo app with TRPC, Next.js, Prisma, Tail
 The app uses optimistic updates for all mutations.
 Auth is via magic link email.
 
+## Steps
+- [x] npm create t3-app@latest
+
+### Backend
+- [x] Update Prisma schema
+- [x] Add Email auth provider
+- [x] Create TRPC router for Todos
+
+### Frontend
+- [x] Login
+- [x] List Todos
+- [x] Create Todos
+- [x] Toggle Todo
+- [x] Delete Todo
+- [] Optimistic updates
+
+
+
+
+
+
+
+
 # Create T3 App
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
